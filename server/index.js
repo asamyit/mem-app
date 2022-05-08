@@ -16,7 +16,14 @@ try {
       serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
       socketTimeoutMS: 45000 // Close sockets after 45 seconds of inactivity
     },
-      function(err){if(err){console.log('Error Connection')}else{console.log('Data Base Connected')}}
+    function(err){
+        if(err){
+            console.log('Error Connection')
+        }
+        else{
+            console.log('Data Base Connected')
+        }
+    }
     )
 } 
 catch (error) {
