@@ -1,10 +1,10 @@
 import express from 'express'
+import postController from '../controllers/posts.js'
 
 const posts = express.Router()
 
-posts.get('/',(req,res)=>{
-    res.send('First Reqest')
-})
+posts.get('/', postController.getPosts)
+posts.post('/',postController.addPosts)
 
 
 
