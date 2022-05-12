@@ -1,3 +1,4 @@
+import mongoose from 'mongoose'
 import PostModel from '../models/postMessage.js'
 
 const PostController = {
@@ -23,6 +24,36 @@ const PostController = {
             res.status(409).json({message : error.message})
            }
        }
+    },
+    deletPost : async(req,res)=>{
+        const id = req.params.id
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(409).json({message : 'No mem exist'})
+        }
+        try {
+           await PostModel.findOneAndDelete({_id:id})
+           res.status(201).json({message:'MemDeleted'})
+        } catch (error) {
+            if (error) {
+                res.status(409).json({message : error.message})
+            }
+        }
+
+    },
+    updatePost : async(req,res)=>{
+        const id = req.params.id
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(409).json({message : 'No mem exist'})
+        }
+        try {
+           const updatepost = await PostModel.findByIdAndUpdate(id,req.body,{new:true})
+           res.status(201).json(updatepost)
+        } catch (error) {
+            if (error) {
+                res.status(409).json({message : error.message})
+            }
+        }
+
     }
 }
 
