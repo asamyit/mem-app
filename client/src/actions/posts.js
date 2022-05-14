@@ -37,6 +37,20 @@ export const updatePost = (id,post)=> async(dispatch)=>{
     }
 }
 
+export const likePost = (id)=> async(dispatch)=>{
+    try {
+        let {data} = await api.fetchPostByID(id)
+        const likeCount = data.likeCount + 1
+        data = await api.updatePost(id,{likeCount:likeCount})
+        dispatch({
+            type : 'LIKE',
+            payload : data.data
+        })
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
 export const deletePost = (id)=> async(dispatch)=>{
     try {
         await api.deletePost(id)

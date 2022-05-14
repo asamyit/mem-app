@@ -5,12 +5,19 @@ export default (posts = [] , action)=>{
         case 'CREATE':
             return [...posts,action.payload] 
         case 'UPDATE':
-            console.log(action.payload)
             return posts.map((post)=>{
                 if (post._id === action.payload._id) {
                     return action.payload
                 }else{
                    return post
+                }
+            })
+        case 'LIKE':
+            return posts.map((post)=>{
+                if (post._id === action.payload._id) {
+                    return action.payload
+                }else{
+                    return post
                 }
             })
         case 'DELETE':

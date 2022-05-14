@@ -13,6 +13,21 @@ const PostController = {
         }
        
     },
+    getPostByID : async (req,res)=>{
+        const id = req.params.id
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(409).json({message : 'No mem exist'})
+        }
+        try {
+            const post = await PostModel.findById({_id:id})
+            res.status(200).json(post)
+        } catch (error) {
+            if (error) {
+                res.status(404).json({message : error.message})
+            }
+        }
+       
+    },
     addPosts : async (req,res)=>{
        const post = req.body
        const newPost = new PostModel(post)

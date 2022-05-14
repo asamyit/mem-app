@@ -2,7 +2,7 @@ import React from 'react'
 import {useDispatch} from 'react-redux'
 import swal from 'sweetalert';
 import { updatPostID } from '../../../actions/post_id'
-import { deletePost } from '../../../actions/posts'
+import { deletePost,likePost } from '../../../actions/posts'
 import { Card , CardActions, CardContent , CardMedia , Button , Typography } from '@material-ui/core'
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -21,8 +21,8 @@ export default function Post({post}) {
       // dispatch(deletePost(id))
       swal({
         title: "Are you sure?",
-        text: "Once deleted, you will not be able to recover this imaginary file!",
-        icon: "warning",
+        text: "Once deleted, you will not be able to recover this Mem!",
+        icon: "error",
         buttons: true,
         dangerMode: true,
       })
@@ -31,6 +31,10 @@ export default function Post({post}) {
           dispatch(deletePost(id))
         } 
       });
+    }
+
+    const handelLike = (id)=>{
+      dispatch(likePost(id))
     }
   return (
     <Card className={classes.card}>
@@ -45,19 +49,19 @@ export default function Post({post}) {
         </Button>
       </div>
       <div className={classes.details}>
-        <Typography variant='body2' color='textSecondary'></Typography>
+        <Typography variant='body2' color='textSecondary'>{post.tags.map((p)=>`#${p} `)}</Typography>
       </div>
       <CardContent>
         <Typography className={classes.title} variant='h5' gutterBottom>{post.title}</Typography>
-        <Typography className={classes.title} variant='h5' gutterBottom>{post.message}</Typography>
+        <Typography className={classes.title} variant='body2' color='textSecondary'>{post.message}</Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
-        <Button size='small' color='primary' onClick={()=>{}}>
-          <ThumbUpAltIcon fontSize='small' /> Like
+        <Button size='small' color='primary' onClick={()=>{handelLike(post._id)}}>
+          <ThumbUpAltIcon fontSize='small' />&nbsp; Like &nbsp;
           {post.likeCount}
         </Button>
         <Button size='small' color='primary' onClick={()=>{handleDelete(post._id)}}>
-          <DeleteIcon fontSize='small' /> Delete
+          <DeleteIcon fontSize='small' /> &nbsp; Delete
         </Button>
       </CardActions>
     </Card>

@@ -6,7 +6,7 @@ import routers from './routes/index.js'
 
 const app = express()
 const PORT = process.env.PORT || 5000
-const MONGODB_URI = process.env.MONGODB_URI 
+const MONGODB_URI = process.env.MONGODB_URI_LOCAL
 
 try {
     mongoose.connect(MONGODB_URI,
