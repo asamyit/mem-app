@@ -18,6 +18,9 @@ export default makeStyles((theme) => ({
   [theme.breakpoints.down('sm')]:{
     mainContainer :{
       flexDirection:'column-reverse'
+    },
+    mainTitle : {
+      fontSize :'2.125rem'
     }
   }
 }));

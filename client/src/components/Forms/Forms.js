@@ -32,12 +32,13 @@ export default function Forms() {
   },[id])
   return (
     <Paper className={classes.paper}>
-      <form autoComplete='off' noValidate className={`${classes.form} ${classes.root}`} onSubmit={handleSubmit}>
+      <form autoComplete='off'  className={`${classes.form} ${classes.root}`} onSubmit={handleSubmit}>
         <Typography variant='h6'>{id===0?'Create a Mem':'Edit a Mem'}</Typography>
         <TextField 
           name='creator'
           variant='outlined'
           label = 'Creator'
+          required
           fullWidth
           value={postData.creator}
           onChange={(e)=> setPostData({...postData,creator:e.target.value})}
@@ -48,6 +49,7 @@ export default function Forms() {
           variant='outlined'
           label = 'Title'
           fullWidth
+          required
           value={postData.title}
           onChange={(e)=> setPostData({...postData,title:e.target.value})}
         />
@@ -57,6 +59,7 @@ export default function Forms() {
           variant='outlined'
           label = 'Message'
           fullWidth
+          required
           value={postData.message}
           onChange={(e)=> setPostData({...postData,message:e.target.value})}
         />
@@ -66,6 +69,7 @@ export default function Forms() {
           variant='outlined'
           label = 'Tags'
           fullWidth
+          required
           value={postData.tags}
           onChange={(e)=> setPostData({...postData,tags:e.target.value.split(',')})}
         />
